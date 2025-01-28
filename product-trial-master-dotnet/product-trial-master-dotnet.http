@@ -1,0 +1,6 @@
+@product_trial_master_dotnet_HostAddress = http://localhost:5203
+
+GET {{product_trial_master_dotnet_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
