@@ -50,7 +50,18 @@ jobs:
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
           echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
           echo "PRIVATE_KEY=${{ secrets.PRIVATE_KEY }}" >> $GITHUB_ENV
-
+      
+      - name: Add secrets to Azure App Service
+        uses: azure/appservice-settings@v1
+        with:
+          app-name: 'productTrialMasterDotnet'
+          settings-json: |
+            {
+              "DB_USER": "${{ secrets.DB_USER }}",
+              "DB_PASSWORD": "${{ secrets.DB_PASSWORD }}",
+              "PRIVATE_KEY": "${{ secrets.PRIVATE_KEY }}"
+            }
+            
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
