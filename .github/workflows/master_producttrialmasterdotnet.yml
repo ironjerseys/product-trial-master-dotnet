@@ -55,7 +55,7 @@ jobs:
         uses: azure/appservice-settings@v1
         with:
           app-name: 'productTrialMasterDotnet'
-          settings-json: |
+          app-settings-json: |
             {
               "DB_USER": "${{ secrets.DB_USER }}",
               "DB_PASSWORD": "${{ secrets.DB_PASSWORD }}",
