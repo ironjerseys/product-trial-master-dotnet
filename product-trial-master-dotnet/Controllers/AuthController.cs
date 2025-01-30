@@ -55,7 +55,6 @@ public class AuthController : ControllerBase
     }
 
 
-
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] User newUser)
     {
@@ -74,5 +73,4 @@ public class AuthController : ControllerBase
 
         return Ok(new { message = "Utilisateur enregistré avec succès." });
     }
-
 }
