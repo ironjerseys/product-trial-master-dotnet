@@ -45,11 +45,21 @@ jobs:
           name: .net-app
           path: ${{github.workspace}}/myapp 
 
-      - name: Set environment variables
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Check Azure Login
+        run: az account show
+
+      - name: Set Azure App Service Environment Variables
         run: |
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
-          echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
-          echo "PRIVATE_KEY=${{ secrets.PRIVATE_KEY }}" >> $GITHUB_ENV
+          az webapp config appsettings set --name productTrialMasterDotnet --resource-group <RESOURCE_GROUP> \
+            --settings DB_USER=${{ secrets.DB_USER }} DB_PASSWORD=${{ secrets.DB_PASSWORD }} PRIVATE_KEY=${{ secrets.PRIVATE_KEY }}
+
+      - name: Verify Azure App Service Environment Variables
+        run: az webapp config appsettings list --name productTrialMasterDotnet --resource-group <RESOURCE_GROUP>
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
