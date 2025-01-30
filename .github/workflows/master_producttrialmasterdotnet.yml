@@ -65,5 +65,5 @@ jobs:
         with:
           app-name: 'productTrialMasterDotnet'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CB89B14C639449358C272EE4D518BB6A  }}
           package: ${{github.workspace}}/myapp
